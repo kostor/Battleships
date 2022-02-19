@@ -8,11 +8,11 @@ class Fleet:
         self.destroyer = Boat("Destroyer", 3)
         self.submarine = Boat("Submarine", 3)
         self.patrol_boat = Boat("Patrol Boat", 5)
-        self.fleet = {"Carrier": self.carrier, "Battleship": self.battleship, "Destroyer": self.destroyer, "Submarine": self.submarine, "Patrol Boat": self.patrol_boat}
+        self.fleet_dict = {"Carrier": self.carrier, "Battleship": self.battleship, "Destroyer": self.destroyer, "Submarine": self.submarine, "Patrol Boat": self.patrol_boat}
 
     def destroy_boat(self, type):
-        if type in self.fleet.keys():
-            return self.fleet.popitem(type)
+        if type in self.fleet_dict.keys():
+            return self.fleet_dict.popitem(type)
         else:
             print("Error: Boat not found in player's fleet!")
             return False
