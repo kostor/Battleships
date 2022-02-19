@@ -8,6 +8,10 @@ class Boat:
         return self.size
     def get_type(self):
         return self.type
+    def set_location(self, location):
+        self.location = location
+    def set_orientation(self, orientation):
+        self.orientation = orientation
 
 
 
