@@ -4,7 +4,7 @@ class Player:
     # class id for each instantation
     id = 0
 
-    def __init__(self, id, locations_list, orientations_list):        
+    def __init__(self, locations_list, orientations_list):        
         # get the current id (should always amount to 1 max)
         self.id = Player.id
         # add 1 to class's id
