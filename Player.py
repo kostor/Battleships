@@ -1,4 +1,4 @@
-import Fleet
+from Fleet import Fleet
 class Player:
     
     # class id for each instantation
@@ -18,8 +18,8 @@ class Player:
             for index in range(len(locations_list)):
                 # address the self fleet object. in it, address the fleet dict containing the dict of all active boats. go one by one
                 # using the index to find the keys by order, and set loc and orient
-                self.fleet.fleet_dict[list(fleet.fleet_dict.keys())[index]].set_location(locations_list[index])
-                self.fleet.fleet_dict[list(fleet.fleet_dict.keys())[index]].set_orientation(locations_list[index])
+                self.fleet.fleet_dict[list(self.fleet.fleet_dict.keys())[index]].set_location(locations_list[index])
+                self.fleet.fleet_dict[list(self.fleet.fleet_dict.keys())[index]].set_orientation(orientations_list[index])
             
     
 

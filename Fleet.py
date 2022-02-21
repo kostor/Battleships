@@ -1,5 +1,5 @@
 # import boat base class to create objects for a fleet
-import Boat
+from Boat import Boat
 
 class Fleet:
     # init fleet object with player id. Then create all the boats objects
