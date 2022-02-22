@@ -24,6 +24,7 @@
     <Compile Include="Battleships.py" />
     <Compile Include="Boat.py" />
     <Compile Include="Gamemaster.py" />
+    <Compile Include="Map.py" />
     <Compile Include="Player.py" />
     <Compile Include="Fleet.py" />
   </ItemGroup>
