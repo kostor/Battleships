@@ -1,16 +1,13 @@
 class Map:
     # init the class
-    def __init__(self, boat_locations, boat_orientations):
-        # save the boat sizes. this needs to become a parameter!
-        self.boat_sizes = [5, 4, 3, 3, 2]
-        self.map_size = 10
-        # create a map of map_size^2. this uses 10 different rows of 10 ~ (tilde) sign. 
-        # other definitions might use 1 row of 10 ~ (tilde) signs 10 times (replicates), meaning any change
-        # in 1 row would carry to all of them
-        self.boat_map = [["~"]*self.map_size for i in range(self.map_size)]
-        # save parameters to local vars
+    def __init__(self, boat_locations, boat_orientations, boat_sizes, map_size):
+        
         self.boat_locations = boat_locations
         self.boat_orientations = boat_orientations
+        self.boat_sizes = boat_sizes
+        self.map_size = map_size
+        
+        self.boat_map = self.create_empty_map()
 
         self.number_to_letter={1: "A",2: "B", 3:"C",4:"D",5:"E",6:"F",7:"G",8:"H",9:"I",10:"J"} # for later use, prints map's headline
    
@@ -50,6 +47,13 @@ class Map:
             self.map += "\n"
             count+=1
         return self.map
+
+    def create_empty_map():
+        # create a map of map_size^2. this uses 10 different rows of 10 ~ (tilde) sign. 
+        # other definitions might use 1 row of 10 ~ (tilde) signs 10 times (replicates), meaning any change
+        # in 1 row would carry to all of them
+        [["~"]*self.map_size for i in range(self.map_size)]
+
 
     # this function get list of (x,y) points and changes their marker to specified marker parameter
     def change_marker(self, x_list, y_list, marker):

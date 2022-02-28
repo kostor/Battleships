@@ -6,6 +6,8 @@ class Gamemaster:
     boat_sizes = [5, 4, 3, 3, 2] # boat sizes assuming usual game set
     fleet_size = len(boat_sizes) # this will make sure that we just 
                                  # need to change the boat configuration and the fleet size will automatically be updated
+    map_size = 10
+    
     def __init__(self):
         self.player1_locations = []
         self.player2_locations = []
@@ -14,7 +16,7 @@ class Gamemaster:
         
         # randomize orientations for each ship in the fleet
         for index in range(Gamemaster.fleet_size):
-            self.player1_orientations.append(random.randint(0,1))
+            self.player1_orientations.append(random.randint(0,1))   
             self.player2_orientations.append(random.randint(0,1))
         #for index in range(Gamemaster.fleet_size):
             
