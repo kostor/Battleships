@@ -9,12 +9,14 @@ class Map:
         
         self.boat_map = self.create_empty_map()
 
-        self.number_to_letter={1: "A",2: "B", 3:"C",4:"D",5:"E",6:"F",7:"G",8:"H",9:"I",10:"J"} # for later use, prints map's headline
+        self.number_to_letter={0: "A", 1: "B", 2:"C", 3:"D", 4:"E", 5:"F", 6:"G", 7:"H", 8:"I", 9:"J"} # for later use, prints map's headline
+        #self.number_to_letter={1: "0",2: "1", 3: "2", 4:"3", 5:"4", 6:"5", 7:"6", 8:"7", 9:"8", 10:"9"} # for later use, prints map's headline
      
     # the way this class should print itself
     def __str__(self):       
         # create a blank string map to fill soon
         self.map = "   1  2  3  4  5  6  7  8  9  10\n"
+        #self.map = "   0  1  2  3  4  5  6  7  8  9\n"
         # run through boat locations and orientations and place them on the map (M)
         for i, loc_dict in enumerate(self.boat_locations): # using enumerate for easy access to indexation
             # save coordinates into variables
@@ -33,7 +35,7 @@ class Map:
 
         # Now run thru the map and assign it's marker values (M or ~ [tilde]) into the string
         # this way the symbols of lists such as [] and of strings such as "",'' will not show in the final print
-        count = 1
+        count = 0
         for row in self.boat_map:
             self.map+=self.number_to_letter[count] + "  "
             for col in row:
@@ -54,8 +56,8 @@ class Map:
         
         for x in x_list: # run thru Xs
             for y in y_list: # run thru Ys
-                if marker != self.boat_map[y-1][x-1]: # change the marker if needed
-                    self.boat_map[y-1][x-1] = marker
+                if marker != self.boat_map[y][x]: # change the marker if needed
+                    self.boat_map[y][x] = marker
                 else:
                     continue # skip if marker is the same
     
@@ -64,9 +66,9 @@ class Map:
     def get_marker(self, x_list, y_list):
         if len(y_list) == 1:
             #return [self.boat_map[y_list[0]][j][x_list[0]:x_list[-1]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
-            return self.boat_map[y_list[0]-1][x_list[0]:x_list[-1]]
+            return self.boat_map[y_list[0]][x_list[0]:x_list[-1]]
         else:
-            return [self.boat_map[y_list[0]:y_list[-1]][j][x_list[0]-1] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
+            return [self.boat_map[y_list[0]:y_list[-1]][j][x_list[0]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
             #return self.boat_map[y_list[0]:y_list[-1]][x_list[0]]
 
         # first, self.boat_map[y_list[0]:y_list[-1]] is the list of rows we want. Each row is a list itself,

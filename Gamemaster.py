@@ -29,7 +29,7 @@ class Gamemaster:
         for index in range(Gamemaster.fleet_size):
             if self.player_orientations[index] != 1: # if ship is horizontal. This includes extreme cases where orientation is not 0 or 1
                 while True:
-                    self.player_boat_locations.append({"X": random.randint(1,10 - Gamemaster.boat_sizes[index]+1), "Y": random.randint(1,10)})
+                    self.player_boat_locations.append({"X": random.randint(0,9 - Gamemaster.boat_sizes[index]+1), "Y": random.randint(0,9)})
                     
                     if Gamemaster.boat_marker not in self.defense_map.get_marker([self.player_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index]+1)], [self.player_boat_locations[index]["Y"]]):
                         self.defense_map.set_marker([self.player_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index])], [self.player_boat_locations[index]["Y"]], Gamemaster.boat_marker)
@@ -38,7 +38,7 @@ class Gamemaster:
                 
             else: # if ship is vertical
                 while True:
-                    self.player_boat_locations.append({"X": random.randint(1,10), "Y":random.randint(1,10-Gamemaster.boat_sizes[index]+1)})
+                    self.player_boat_locations.append({"X": random.randint(0,9), "Y":random.randint(0,9-Gamemaster.boat_sizes[index]+1)})
                     
                     if Gamemaster.boat_marker not in self.defense_map.get_marker([self.player_boat_locations[index]["X"]], [self.player_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index]+1)]):
                         self.defense_map.set_marker([self.player_boat_locations[index]["X"]], [self.player_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index])], Gamemaster.boat_marker)
@@ -47,7 +47,7 @@ class Gamemaster:
 
             if self.enemy_orientations[index] != 1:  # if ship is horizontal. This includes extreme cases where orientation is not 0 or 1
                 while True:
-                    self.enemy_boat_locations.append({"X": random.randint(1,10 - Gamemaster.boat_sizes[index]+1), "Y": random.randint(1,10)})
+                    self.enemy_boat_locations.append({"X": random.randint(0,9 - Gamemaster.boat_sizes[index]+1), "Y": random.randint(0,9)})
                     
                     if Gamemaster.boat_marker not in self.attack_map.get_marker([self.enemy_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index])], [self.enemy_boat_locations[index]["Y"]]):
                         self.attack_map.set_marker([self.enemy_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index])], [self.enemy_boat_locations[index]["Y"]], Gamemaster.boat_marker)
@@ -55,7 +55,7 @@ class Gamemaster:
                     self.enemy_boat_locations.pop()
             else: # if ship is vertical
                 while True:
-                    self.enemy_boat_locations.append({"X": random.randint(1,10), "Y":random.randint(1,10-Gamemaster.boat_sizes[index]+1)})
+                    self.enemy_boat_locations.append({"X": random.randint(0,9), "Y":random.randint(0,9-Gamemaster.boat_sizes[index]+1)})
                     
                     if Gamemaster.boat_marker not in self.attack_map.get_marker([self.enemy_boat_locations[index]["X"]], [self.enemy_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index])]):
                         self.attack_map.set_marker([self.enemy_boat_locations[index]["X"]], [self.enemy_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index])], Gamemaster.boat_marker)
