@@ -49,7 +49,7 @@ class Gamemaster:
                 while True:
                     self.enemy_boat_locations.append({"X": random.randint(0,9 - Gamemaster.boat_sizes[index]+1), "Y": random.randint(0,9)})
                     
-                    if Gamemaster.boat_marker not in self.attack_map.get_marker([self.enemy_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index])], [self.enemy_boat_locations[index]["Y"]]):
+                    if Gamemaster.boat_marker not in self.attack_map.get_marker([self.enemy_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index]+1)], [self.enemy_boat_locations[index]["Y"]]):
                         self.attack_map.set_marker([self.enemy_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index])], [self.enemy_boat_locations[index]["Y"]], Gamemaster.boat_marker)
                         break
                     self.enemy_boat_locations.pop()
@@ -57,7 +57,7 @@ class Gamemaster:
                 while True:
                     self.enemy_boat_locations.append({"X": random.randint(0,9), "Y":random.randint(0,9-Gamemaster.boat_sizes[index]+1)})
                     
-                    if Gamemaster.boat_marker not in self.attack_map.get_marker([self.enemy_boat_locations[index]["X"]], [self.enemy_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index])]):
+                    if Gamemaster.boat_marker not in self.attack_map.get_marker([self.enemy_boat_locations[index]["X"]], [self.enemy_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index]+1)]):
                         self.attack_map.set_marker([self.enemy_boat_locations[index]["X"]], [self.enemy_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index])], Gamemaster.boat_marker)
                         break
                     self.enemy_boat_locations.pop()
