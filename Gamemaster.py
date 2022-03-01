@@ -16,7 +16,7 @@ class Gamemaster:
         self.enemy_orientations = []
         
         self.attack_map = Map([], [], Gamemaster.boat_sizes, Gamemaster.map_size)
-        self.defense_map = Map([],[], Gamemaster.boat_sizes, Gamemaster.map_size)
+        self.defence_map = Map([],[], Gamemaster.boat_sizes, Gamemaster.map_size)
 
         # randomize orientations for each ship in the fleet
         for index in range(Gamemaster.fleet_size):
@@ -31,8 +31,8 @@ class Gamemaster:
                 while True:
                     self.player_boat_locations.append({"X": random.randint(0,9 - Gamemaster.boat_sizes[index]+1), "Y": random.randint(0,9)})
                     
-                    if Gamemaster.boat_marker not in self.defense_map.get_marker([self.player_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index]+1)], [self.player_boat_locations[index]["Y"]]):
-                        self.defense_map.set_marker([self.player_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index])], [self.player_boat_locations[index]["Y"]], Gamemaster.boat_marker)
+                    if Gamemaster.boat_marker not in self.defence_map.get_marker([self.player_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index]+1)], [self.player_boat_locations[index]["Y"]]):
+                        self.defence_map.set_marker([self.player_boat_locations[index]["X"]+i for i in range(Gamemaster.boat_sizes[index])], [self.player_boat_locations[index]["Y"]], Gamemaster.boat_marker)
                         break
                     self.player_boat_locations.pop()
                 
@@ -40,8 +40,8 @@ class Gamemaster:
                 while True:
                     self.player_boat_locations.append({"X": random.randint(0,9), "Y":random.randint(0,9-Gamemaster.boat_sizes[index]+1)})
                     
-                    if Gamemaster.boat_marker not in self.defense_map.get_marker([self.player_boat_locations[index]["X"]], [self.player_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index]+1)]):
-                        self.defense_map.set_marker([self.player_boat_locations[index]["X"]], [self.player_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index])], Gamemaster.boat_marker)
+                    if Gamemaster.boat_marker not in self.defence_map.get_marker([self.player_boat_locations[index]["X"]], [self.player_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index]+1)]):
+                        self.defence_map.set_marker([self.player_boat_locations[index]["X"]], [self.player_boat_locations[index]["Y"]+i for i in range(Gamemaster.boat_sizes[index])], Gamemaster.boat_marker)
                         break
                     self.player_boat_locations.pop()
 
@@ -69,7 +69,7 @@ class Gamemaster:
         print(self.player_boat_locations)
         print(self.player_orientations)
         print("DEBUG END--Gamemaster.py--REMOVE BEFORE LAUNCH")
-        print(self.defense_map)
+        print(self.defence_map)
 
     def get_player1(self):
         return self.player1
