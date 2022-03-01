@@ -9,18 +9,14 @@ class Map:
         
         self.boat_map = self.create_empty_map()
 
-        self.number_to_letter={1: "A",2: "B", 3:"C",4:"D",5:"E",6:"F",7:"G",8:"H",9:"I",10:"J"} # for later use, prints map's headline
-   
+        self.number_to_letter={0: "A", 1: "B", 2:"C", 3:"D", 4:"E", 5:"F", 6:"G", 7:"H", 8:"I", 9:"J"} # for later use, prints map's headline
+        #self.number_to_letter={1: "0",2: "1", 3: "2", 4:"3", 5:"4", 6:"5", 7:"6", 8:"7", 9:"8", 10:"9"} # for later use, prints map's headline
+     
     # the way this class should print itself
-    def __str__(self):
-        # print boat locations to make sure the correct locations are set.
-        print("DEBUG--MAP.py--REMOVE BEFORE LAUNCH")
-        print(self.boat_locations)
-        print(self.boat_orientations)
-        print("DEBUG END--MAP.py--REMOVE BEFORE LAUNCH")
-        
+    def __str__(self):       
         # create a blank string map to fill soon
         self.map = "   1  2  3  4  5  6  7  8  9  10\n"
+        #self.map = "   0  1  2  3  4  5  6  7  8  9\n"
         # run through boat locations and orientations and place them on the map (M)
         for i, loc_dict in enumerate(self.boat_locations): # using enumerate for easy access to indexation
             # save coordinates into variables
@@ -39,7 +35,7 @@ class Map:
 
         # Now run thru the map and assign it's marker values (M or ~ [tilde]) into the string
         # this way the symbols of lists such as [] and of strings such as "",'' will not show in the final print
-        count = 1
+        count = 0
         for row in self.boat_map:
             self.map+=self.number_to_letter[count] + "  "
             for col in row:
@@ -48,28 +44,32 @@ class Map:
             count+=1
         return self.map
 
-    def create_empty_map():
+    def create_empty_map(self):
         # create a map of map_size^2. this uses 10 different rows of 10 ~ (tilde) sign. 
         # other definitions might use 1 row of 10 ~ (tilde) signs 10 times (replicates), meaning any change
         # in 1 row would carry to all of them
-        [["~"]*self.map_size for i in range(self.map_size)]
+        return [["~"]*self.map_size for i in range(self.map_size)]
 
 
     # this function get list of (x,y) points and changes their marker to specified marker parameter
-    def change_marker(self, x_list, y_list, marker):
+    def set_marker(self, x_list, y_list, marker):
         
         for x in x_list: # run thru Xs
             for y in y_list: # run thru Ys
-                if marker != self.map[y][x]: # change the marker if needed
-                    self.map[y][x] = marker
+                if marker != self.boat_map[y][x]: # change the marker if needed
+                    self.boat_map[y][x] = marker
                 else:
                     continue # skip if marker is the same
     
     # This function takes (x,y) list of interests of the boat_map points and returns them as a 2d array
 
     def get_marker(self, x_list, y_list):
-        return [self.boat_map[y_list[0]:y_list[-1]][j][x_list[0]:x_list[-1]] 
-                for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
+        if len(y_list) == 1:
+            #return [self.boat_map[y_list[0]][j][x_list[0]:x_list[-1]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
+            return self.boat_map[y_list[0]][x_list[0]:x_list[-1]]
+        else:
+            return [self.boat_map[y_list[0]:y_list[-1]][j][x_list[0]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
+            #return self.boat_map[y_list[0]:y_list[-1]][x_list[0]]
 
         # first, self.boat_map[y_list[0]:y_list[-1]] is the list of rows we want. Each row is a list itself,
         # making it a list of lists (2D array). where y_list[0] is the start row y_list[-1] is used as stop in boat_map.
