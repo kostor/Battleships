@@ -64,12 +64,14 @@ class Map:
     # This function takes (x,y) list of interests of the boat_map points and returns them as a 2d array
 
     def get_marker(self, x_list, y_list):
-        if len(y_list) == 1:
+        if len(y_list) == 1 and len(x_list) > 1:
             #return [self.boat_map[y_list[0]][j][x_list[0]:x_list[-1]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
             return self.boat_map[y_list[0]][x_list[0]:x_list[-1]]
-        else:
+        elif len(y_list) > 1 and len(x_list) == 1:
             return [self.boat_map[y_list[0]:y_list[-1]][j][x_list[0]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
             #return self.boat_map[y_list[0]:y_list[-1]][x_list[0]]
+        else:
+            return self.boat_map[y_list[0]][x_list[0]]
 
         # first, self.boat_map[y_list[0]:y_list[-1]] is the list of rows we want. Each row is a list itself,
         # making it a list of lists (2D array). where y_list[0] is the start row y_list[-1] is used as stop in boat_map.
