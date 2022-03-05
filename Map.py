@@ -53,7 +53,6 @@ class Map:
 
     # this function get list of (x,y) points and changes their marker to specified marker parameter
     def set_marker(self, x_list, y_list, marker):
-        
         for x in x_list: # run thru Xs
             for y in y_list: # run thru Ys
                 if marker != self.boat_map[y][x]: # change the marker if needed
@@ -61,33 +60,16 @@ class Map:
                 else:
                     continue # skip if marker is the same
     
-    # This function takes (x,y) list of interests of the boat_map points and returns them as a 2d array
-
+    # This function takes (x,y) list of interests of the boat_map points and returns them as a 1D or 2D area
     def get_marker(self, x_list, y_list):
-        if len(y_list) == 1 and len(x_list) > 1:
-            #return [self.boat_map[y_list[0]][j][x_list[0]:x_list[-1]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
+        if len(y_list) == 1 and len(x_list) > 1: # map is asked to return a row of numbers
             return self.boat_map[y_list[0]][x_list[0]:x_list[-1]]
-        elif len(y_list) > 1 and len(x_list) == 1:
+        elif len(y_list) > 1 and len(x_list) == 1: # map is asked to return a coloumn of numbers
             return [self.boat_map[y_list[0]:y_list[-1]][j][x_list[0]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
-            #return self.boat_map[y_list[0]:y_list[-1]][x_list[0]]
-        elif len(y_list) > 1 and len(x_list) > 1:
+        elif len(y_list) > 1 and len(x_list) > 1: # map is asked to return a whole segment
             return self.boat_map[y_list[0]:][x_list[0]:]
-        else:
+        else: # map is asked to return a single point
             return self.boat_map[y_list[0]][x_list[0]]
-
-        # first, self.boat_map[y_list[0]:y_list[-1]] is the list of rows we want. Each row is a list itself,
-        # making it a list of lists (2D array). where y_list[0] is the start row y_list[-1] is used as stop in boat_map.
-        # We want to extract each row so later we could look at the specified x values - the coloumns.
-
-        # To extract the rows from parent list we use: self.boat_map[y_list[0]:y_list[-1]][j]
-        # We create iterative j variable that runs on the range(len(y_list)-1) (minus 1 bc of y_list[-1] is exclusive stop).
-        # now we have each row individually instead of all the rows stacked together in one big list.
-
-        # so now we can take look at the Xs with self.boat_map[y_list[0]:y_list[-1]][j][x_list[0]:x_list[-1]] where
-        # x_list[-1] is the stop. 
-
-        # the returned resault is a smaller part taken from boat_map back.
-
     
     # TODO: function to reset the markers at all spots
     def reset_map(self):
@@ -104,16 +86,16 @@ class Map:
         return self.boat_map
 
     def print_enemy_map(self):
-        map = "   1  2  3  4  5  6  7  8  9  10\n"
+        map = "   1  2  3  4  5  6  7  8  9  10\n" # map header
         count = 0 # counter to change row num to ABC equiv.
-        for row in self.boat_map:
-            map+=self.number_to_letter[count] + "  " 
+        for row in self.boat_map: # go thru rows of the map
+            map+=self.number_to_letter[count] + "  " # add the row header
             for col in row:
-                if col == "M":
+                if col == "M": # if the position in the row is a boat, conceal it.
                     map += "~  " # water marker
                 else:
-                    map += col + "  "
+                    map += col + "  " # if it's a hit, miss or water, show it.
             map += "\n"
             count+=1
         return map
-        #return self.boat_map
+        
