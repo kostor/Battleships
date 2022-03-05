@@ -70,6 +70,8 @@ class Map:
         elif len(y_list) > 1 and len(x_list) == 1:
             return [self.boat_map[y_list[0]:y_list[-1]][j][x_list[0]] for j in range(len(self.boat_map[y_list[0]:y_list[-1]] ))]
             #return self.boat_map[y_list[0]:y_list[-1]][x_list[0]]
+        elif len(y_list) > 1 and len(x_list) > 1:
+            return self.boat_map[y_list[0]:][x_list[0]:]
         else:
             return self.boat_map[y_list[0]][x_list[0]]
 
@@ -100,3 +102,18 @@ class Map:
             count+=1
         self.boat_map = self.map
         return self.boat_map
+
+    def print_enemy_map(self):
+        map = "   1  2  3  4  5  6  7  8  9  10\n"
+        count = 0 # counter to change row num to ABC equiv.
+        for row in self.boat_map:
+            map+=self.number_to_letter[count] + "  " 
+            for col in row:
+                if col == "M":
+                    map += "~  " # water marker
+                else:
+                    map += col + "  "
+            map += "\n"
+            count+=1
+        return map
+        #return self.boat_map
